@@ -1,0 +1,192 @@
+const planetData = {
+  sun: {
+    kicker: "Zentralstern",
+    name: "Sonne",
+    description:
+      "Die Sonne ist der Stern im Zentrum unseres Sonnensystems. Ihre Energie macht Leben auf der Erde möglich.",
+    distance: "0 km",
+    size: "1.392.700 km",
+    moons: "0",
+    temp: "ca. 5.500 °C Oberfläche",
+    facts: [
+      "Die Sonne enthält mehr als 99,8 Prozent der Masse des Sonnensystems.",
+      "Ihr Licht braucht etwa 8 Minuten bis zur Erde."
+    ]
+  },
+  mercury: {
+    kicker: "Innerster Planet",
+    name: "Merkur",
+    description:
+      "Merkur ist der kleinste Planet und kreist am nächsten an der Sonne. Er besitzt fast keine Atmosphäre.",
+    distance: "ca. 58 Mio. km",
+    size: "4.879 km",
+    moons: "0",
+    temp: "ca. -180 °C bis 430 °C",
+    facts: [
+      "Ein Jahr auf Merkur dauert nur 88 Erdentage.",
+      "Trotz Sonnennähe ist er nicht der heisseste Planet."
+    ]
+  },
+  venus: {
+    kicker: "Heisseste Welt",
+    name: "Venus",
+    description:
+      "Venus ist etwa so gross wie die Erde, hat aber eine extrem dichte Atmosphäre und einen starken Treibhauseffekt.",
+    distance: "ca. 108 Mio. km",
+    size: "12.104 km",
+    moons: "0",
+    temp: "ca. 465 °C",
+    facts: [
+      "Venus dreht sich in die entgegengesetzte Richtung der meisten Planeten.",
+      "Ein Venustag ist länger als ein Venusjahr."
+    ]
+  },
+  earth: {
+    kicker: "Unser Zuhause",
+    name: "Erde",
+    description:
+      "Die Erde ist der einzige bekannte Planet mit dauerhaft flüssigem Wasser an der Oberfläche und Leben.",
+    distance: "ca. 150 Mio. km",
+    size: "12.742 km",
+    moons: "1",
+    temp: "durchschnittlich ca. 15 °C",
+    facts: [
+      "Rund 71 Prozent der Erdoberfläche sind von Wasser bedeckt.",
+      "Das Magnetfeld schützt uns vor einem Teil des Sonnenwinds."
+    ]
+  },
+  mars: {
+    kicker: "Roter Planet",
+    name: "Mars",
+    description:
+      "Mars ist eine kalte Wüstenwelt mit Staubstürmen, Polkappen und Spuren früherer Wasserläufe.",
+    distance: "ca. 228 Mio. km",
+    size: "6.779 km",
+    moons: "2",
+    temp: "durchschnittlich ca. -63 °C",
+    facts: [
+      "Der Olympus Mons auf Mars ist der grösste bekannte Vulkan im Sonnensystem.",
+      "Seine Monde heissen Phobos und Deimos."
+    ]
+  },
+  jupiter: {
+    kicker: "Grösster Planet",
+    name: "Jupiter",
+    description:
+      "Jupiter ist ein gewaltiger Gasriese mit starken Stürmen, vielen Monden und einem riesigen Magnetfeld.",
+    distance: "ca. 778 Mio. km",
+    size: "139.820 km",
+    moons: "95 bekannt",
+    temp: "ca. -110 °C Wolkenobergrenze",
+    facts: [
+      "Der Grosse Rote Fleck ist ein Sturm, der seit Jahrhunderten beobachtet wird.",
+      "Jupiter ist mehr als doppelt so massereich wie alle anderen Planeten zusammen."
+    ]
+  },
+  saturn: {
+    kicker: "Planet der Ringe",
+    name: "Saturn",
+    description:
+      "Saturn ist ein Gasriese und berühmt für sein helles Ringsystem aus Eis- und Gesteinsbrocken.",
+    distance: "ca. 1,43 Mrd. km",
+    size: "116.460 km",
+    moons: "146 bekannt",
+    temp: "ca. -140 °C",
+    facts: [
+      "Saturns Dichte ist so gering, dass er theoretisch in Wasser schwimmen würde.",
+      "Sein Mond Titan besitzt eine dichte Atmosphäre."
+    ]
+  },
+  uranus: {
+    kicker: "Seitlich gekippt",
+    name: "Uranus",
+    description:
+      "Uranus ist ein Eisriese mit bläulicher Farbe, weil Methan in der Atmosphäre rotes Licht absorbiert.",
+    distance: "ca. 2,87 Mrd. km",
+    size: "50.724 km",
+    moons: "27",
+    temp: "ca. -195 °C",
+    facts: [
+      "Uranus rotiert fast auf der Seite.",
+      "Seine Jahreszeiten dauern jeweils über 20 Erdenjahre."
+    ]
+  },
+  neptune: {
+    kicker: "Äusserster Planet",
+    name: "Neptun",
+    description:
+      "Neptun ist ein ferner Eisriese mit extrem schnellen Winden und einer tiefblauen Atmosphäre.",
+    distance: "ca. 4,5 Mrd. km",
+    size: "49.244 km",
+    moons: "14",
+    temp: "ca. -200 °C",
+    facts: [
+      "Auf Neptun wurden Winde mit über 2.000 km/h gemessen.",
+      "Sein grösster Mond Triton bewegt sich rückläufig um den Planeten."
+    ]
+  }
+};
+
+const buttons = document.querySelectorAll(".planet-button");
+const card = {
+  kicker: document.querySelector("#card-kicker"),
+  name: document.querySelector("#card-name"),
+  description: document.querySelector("#card-description"),
+  distance: document.querySelector("#card-distance"),
+  size: document.querySelector("#card-size"),
+  moons: document.querySelector("#card-moons"),
+  temp: document.querySelector("#card-temp"),
+  facts: document.querySelector("#card-facts")
+};
+
+function showPlanet(key) {
+  const planet = planetData[key];
+
+  card.kicker.textContent = planet.kicker;
+  card.name.textContent = planet.name;
+  card.description.textContent = planet.description;
+  card.distance.textContent = planet.distance;
+  card.size.textContent = planet.size;
+  card.moons.textContent = planet.moons;
+  card.temp.textContent = planet.temp;
+  card.facts.replaceChildren(
+    ...planet.facts.map((fact) => {
+      const item = document.createElement("li");
+      item.textContent = fact;
+      return item;
+    })
+  );
+
+  buttons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.planet === key);
+  });
+}
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => showPlanet(button.dataset.planet));
+});
+
+const distancePlanets = [
+  ["Merkur", 58],
+  ["Venus", 108],
+  ["Erde", 150],
+  ["Mars", 228],
+  ["Jupiter", 778],
+  ["Saturn", 1430],
+  ["Uranus", 2870],
+  ["Neptun", 4500]
+];
+
+const maxDistance = Math.max(...distancePlanets.map((planet) => planet[1]));
+const distanceList = document.querySelector("#distance-list");
+
+distancePlanets.forEach(([name, distance]) => {
+  const item = document.createElement("article");
+  item.className = "distance-item";
+  item.innerHTML = `
+    <strong>${name}</strong>
+    <div class="bar" aria-hidden="true"><span style="--bar-width: ${(distance / maxDistance) * 100}%"></span></div>
+    <span>${distance >= 1000 ? `${(distance / 1000).toFixed(2).replace(".", ",")} Mrd.` : distance} Mio. km</span>
+  `;
+  distanceList.append(item);
+});
